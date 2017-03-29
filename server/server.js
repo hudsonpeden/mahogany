@@ -1,34 +1,33 @@
-import bodyParser from 'body-parser';
+// import bodyParser from 'body-parser';
 import express from 'express';
 import path from 'path';
 
 const app = express();
+const server = app.listen(3001,  () => console.log('Node Backend running on Port 3001'));
+const io = require('socket.io')(server);
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: false}));
 
-const router = express.Router();
 
+// pull frontend from client directory and serve static files
+// express.static is a middleware function
 const staticFiles = express.static(path.join(__dirname, '../../client/build'));
-
 app.use(staticFiles);
 
-router.get('/cities', (req, res) => {
+
     const cities = [
         {name: 'New York City', population: 8175133},
         {name: 'Los Angeles',   population: 3792621},
-        {name: 'Chicago',       population: 2695598}
+        {name: 'Chicago',       population: 2695598},
+
     ];
-    res.json(cities)
+
+io.on('connection', socket => {
+    console.log('a user connected');
+    socket.emit('sendCities', cities);
 });
 
-app.use(router);
 
 app.use('/*', staticFiles);
-
-app.set('port', (process.env.PORT || 3001));
-
-app.listen(app.get('port'), () => {
-    console.log(`Listening on ${app.get('port')}`)
-});

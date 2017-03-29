@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
+import io from 'socket.io-client';
+
+const socket = io();
+
 
 class App extends Component {
     state = {cities: []};
 
     async componentDidMount() {
-        const response = await fetch('/cities');
-        const cities   = await response.json();
+        // const response = await fetch('/cities');
+        // const cities   = await response.json();
 
-        this.setState({cities: cities})
+        socket.on('sendCities', (data) => {
+            console.log(data);
+            this.setState({cities: data})
+        });
     }
 
     render() {
