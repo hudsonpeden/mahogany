@@ -3,7 +3,8 @@ import express from 'express';
 import path from 'path';
 
 const app = express();
-const server = app.listen(3001,  () => console.log('Node Backend running on Port 3001'));
+
+const server = app.listen(process.env.PORT || 3001,  () => console.log('Node Backend running on Port 3001'));
 const io = require('socket.io')(server);
 
 
