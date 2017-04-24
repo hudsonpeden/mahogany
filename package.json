@@ -6,7 +6,8 @@
   "author": "Hudson Peden <hudsonpeden@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "concurrently": "^3.4.0"
+    "concurrently": "^3.4.0",
+    "react-sparklines": "^1.6.0"
   },
   "scripts": {
     "install": "(cd client && yarn) && (cd server && yarn)",

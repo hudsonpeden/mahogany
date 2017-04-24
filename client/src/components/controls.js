@@ -5,6 +5,51 @@
 import React, { Component } from 'react';
 
 export default class Controls extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            setTempA: '',
+            setTempB: '',
+            onIntA: '',
+            offIntA: '',
+            onIntB: '',
+            offIntB: ''
+
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    async componentDidMount() {
+
+    }
+
+    handleChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        //this will set the state of the parent
+        this.setState({
+                [name]: parseFloat(value)
+        });
+    }
+
+    handleClick() {
+        this.props.onUpdate(this.state);
+        this.setState = {
+            setTempA: '',
+            setTempB: '',
+            onIntA: '',
+            offIntA: '',
+            onIntB: '',
+            offIntB: ''
+        }
+    }
+
     render() {
         return(
             <div className="panel panel-default">
@@ -12,9 +57,19 @@ export default class Controls extends Component {
                     <h3 className="panel-title">Controls</h3>
                 </div>
                 <div className="panel-body">
-                    Bacon ipsum dolor amet cow biltong strip steak bresaola spare ribs. Pork loin picanha shank, chicken venison alcatra frankfurter. Andouille turducken ribeye venison, shankle shank porchetta meatloaf meatball. Tongue brisket beef spare ribs, meatloaf bresaola bacon pancetta ball tip drumstick short loin leberkas landjaeger ribeye chicken. Pig boudin frankfurter sirloin shoulder bacon brisket swine pastrami tri-tip hamburger tenderloin turkey tail turducken.
+                    <h5>Above Ground Heater</h5>
+                    <div className="input-group">
+                        <input type="text" className="form-control" name="setTempA" value={this.state.setTempA} placeholder={`desired temp: ${this.props.controls.setTempA} degrees`} onChange={this.handleChange}/>
+                    </div>
+                    <br />
 
-                    Bacon tri-tip pork belly, andouille prosciutto strip steak alcatra beef capicola spare ribs landjaeger jowl. Shank beef drumstick tail, strip steak short ribs sirloin ball tip doner tri-tip t-bone. Pig beef ribs doner shank. Porchetta filet mignon flank ribeye, meatball pork chop cow frankfurter.
+                    <h5>Below Ground Heater</h5>
+                    <div className="input-group">
+                        <input type="text" className="form-control" name="setTempB" value={this.state.setTempB} placeholder={`desired temp: ${this.props.controls.setTempB} degrees`} onChange={this.handleChange}/>
+                    </div>
+                    <br />
+
+                    <button className="btn btn-primary" onClick={this.handleClick}>Update</button>
                 </div>
             </div>
         );

@@ -17,6 +17,14 @@ export default class AppBody extends Component {
         relays: {
             r1: 0,
             r2: 0
+        },
+        controls: {
+            setTempA: 50,
+            setTempB: 50,
+        },
+        tempCache: {
+            tempCacheA: [],
+            tempCacheB: []
         }
     };
 
@@ -30,6 +38,7 @@ export default class AppBody extends Component {
             socket.emit('hello', 'hello from front end');
         });
         socket.emit('requestRelayState', 'request');
+        socket.emit('requestControlState', 'request');
 
         socket.on('sendTemps', (obj) => {
             console.log('temps ' + JSON.stringify(obj));
@@ -54,6 +63,40 @@ export default class AppBody extends Component {
            })
         });
 
+        socket.on('serverControlValue', (val) => {
+            console.log(val);
+            this.setState({
+                controls: {
+                    setTempA: val.setTempA,
+                    setTempB: val.setTempB,
+                }
+            })
+
+        });
+
+        socket.on('serverTempCache', (val) => {
+            console.log(val);
+            this.setState({
+                tempCache: {
+                    tempCacheA: val.tempCacheA,
+                    tempCacheB: val.tempCacheB
+                }
+            });
+            console.log(this.state.tempCache);
+        });
+
+    }
+
+    updateControls(state) {
+        //console.log(state);
+        this.setState({
+            controls: {
+                setTempA: state.setTempA,
+                setTempB: state.setTempB,
+            }
+        });
+
+        socket.emit('sendUpdatedControls', this.state.controls);
     }
 
 
@@ -61,10 +104,10 @@ export default class AppBody extends Component {
         return(
             <div className="row">
                 <div className="col-md-10 col-md-offset-1">
-                    <Overview/>
+                    <Overview tempcache={this.state.tempCache}/>
                     <div className="row">
                         <div className="col-md-6">
-                            <Controls/>
+                            <Controls controls={this.state.controls} onUpdate={this.updateControls = this.updateControls.bind(this)}/>
                         </div>
                         <div className="col-md-6">
                             <SystemData temp={this.state.temp} relays={this.state.relays}/>
