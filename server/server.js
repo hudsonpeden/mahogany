@@ -6,8 +6,9 @@ const app = express();
 //heroku uses the dynamic PORT setup here. 3001 for local run
 const server = app.listen(process.env.PORT || 3001,  () => console.log('Node Backend running on Port 3001'));
 const io = require('socket.io')(server);
+const wwwhisper = require('connect-wwwhisper');
 
-
+app.use(wwwhisper());
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended: false}));
 
@@ -45,6 +46,27 @@ io.on('connection', socket => {
         console.log(val);
         io.sockets.emit('serverRelayValue', val);
     });
+
+    socket.on('requestControlState', () => {
+        console.log('requesting control state');
+        io.sockets.emit('sendControlRequest', 'send');
+    });
+
+    socket.on('piControlValue', (val) => {
+        console.log(val);
+        io.sockets.emit('serverControlValue', val);
+    });
+
+    socket.on('sendUpdatedControls', (val) => {
+        console.log(val);
+        io.sockets.emit('updatedControls', val);
+    });
+
+    socket.on('piTempCache', (val) => {
+        console.log('tempCache: ', val);
+        io.sockets.emit('serverTempCache', val);
+    });
+
 });
 
 
