@@ -33,7 +33,7 @@ export default class Overview extends Component {
                     <div className="row">
                         <div className="col-md-3">
                             <h4>Average Temp Above Ground: </h4>
-                            <h2>{math.round(avgA * 100)/100}</h2>
+                            <h2>{Math.round(avgA * 100)/100}</h2>
                         </div>
                         <div className="col-md-7">
                             <Sparklines data={this.props.tempcache.tempCacheA} height={100}>
@@ -45,7 +45,7 @@ export default class Overview extends Component {
                     <div className="row">
                         <div className="col-md-3">
                             <h4>Average Temp Below Ground: </h4>
-                            <h2>{math.round(avgB*100)/100}</h2>
+                            <h2>{Math.round(avgB*100)/100}</h2>
                         </div>
                         <div className="col-md-7">
                             <Sparklines data={this.props.tempcache.tempCacheB} height={100}>
