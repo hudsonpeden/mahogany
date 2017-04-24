@@ -20,15 +20,15 @@ export default class SystemData extends Component {
                 <div className="panel-body">
                     <ul className="list-group">
                         <li className="list-group-item">
-                            <span className="badge">{(this.props.temp.s1) * (9/5) + 32}</span>
+                            <span className="badge">{math.round(((this.props.temp.s1) * (9/5) + 32)*100 ) /100}</span>
                             Sensor 1
                         </li>
                         <li className="list-group-item">
-                            <span className="badge">{(this.props.temp.s2) * (9/5) + 32}</span>
+                            <span className="badge">{math.round(((this.props.temp.s2) * (9/5) + 32)*100)/100}</span>
                             Sensor 2
                         </li>
                         <li className="list-group-item">
-                            <span className="badge">{(this.props.temp.s3) * (9/5) + 32}</span>
+                            <span className="badge">{math.round(((this.props.temp.s3) * (9/5) + 32)*100)/100}</span>
                             Sensor 3
                         </li>
                         <li className="list-group-item">
