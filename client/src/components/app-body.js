@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Overview from "./overview";
 import SystemData from "./system-data";
-import Forecast from "./local-forecast";
+//mport Forecast from "./local-forecast";
 import Controls from "./controls";
 import io from 'socket.io-client';
 
@@ -111,7 +111,7 @@ export default class AppBody extends Component {
                         </div>
                         <div className="col-md-6">
                             <SystemData temp={this.state.temp} relays={this.state.relays}/>
-                            <Forecast/>
+
                         </div>
                     </div>
                 </div>

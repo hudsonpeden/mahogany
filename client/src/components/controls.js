@@ -12,11 +12,6 @@ export default class Controls extends Component {
         this.state = {
             setTempA: '',
             setTempB: '',
-            onIntA: '',
-            offIntA: '',
-            onIntB: '',
-            offIntB: ''
-
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -43,10 +38,6 @@ export default class Controls extends Component {
         this.setState = {
             setTempA: '',
             setTempB: '',
-            onIntA: '',
-            offIntA: '',
-            onIntB: '',
-            offIntB: ''
         }
     }
 
@@ -57,19 +48,21 @@ export default class Controls extends Component {
                     <h3 className="panel-title">Controls</h3>
                 </div>
                 <div className="panel-body">
-                    <h5>Above Ground Heater</h5>
-                    <div className="input-group">
-                        <input type="text" className="form-control" name="setTempA" value={this.state.setTempA} placeholder={`desired temp: ${this.props.controls.setTempA} degrees`} onChange={this.handleChange}/>
-                    </div>
-                    <br />
+                    <div className="form-horizontal">
+                        <h5>Above Ground Heater set to: {this.props.controls.setTempA} degrees F</h5>
+                        <div className="input-group">
+                            <input type="text" className="form-control" name="setTempA" value={this.state.setTempA} placeholder="Desired temperature above ground" onChange={this.handleChange}/>
+                        </div>
+                        <br />
 
-                    <h5>Below Ground Heater</h5>
-                    <div className="input-group">
-                        <input type="text" className="form-control" name="setTempB" value={this.state.setTempB} placeholder={`desired temp: ${this.props.controls.setTempB} degrees`} onChange={this.handleChange}/>
-                    </div>
-                    <br />
+                        <h5>Below Ground Heater set to: {this.props.controls.setTempB} degrees F</h5>
+                        <div className="input-group">
+                            <input type="text" className="form-control" name="setTempB" value={this.state.setTempB} placeholder="Desired temperature below ground" onChange={this.handleChange}/>
+                        </div>
+                        <br />
 
-                    <button className="btn btn-primary" onClick={this.handleClick}>Update</button>
+                        <button className="btn btn-primary" onClick={this.handleClick}>Update</button>
+                    </div>
                 </div>
             </div>
         );
