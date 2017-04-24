@@ -36,7 +36,7 @@ export default class Overview extends Component {
                             <h2>{Math.round(avgA * 100)/100}</h2>
                         </div>
                         <div className="col-md-7">
-                            <Sparklines data={this.props.tempcache.tempCacheA} height={100}>
+                            <Sparklines data={this.props.tempcache.tempCacheA} min="0" max="100">
                                 <SparklinesLine color="blue"/>
                                 <SparklinesReferenceLine type="mean"/>
                             </Sparklines>
@@ -48,7 +48,7 @@ export default class Overview extends Component {
                             <h2>{Math.round(avgB*100)/100}</h2>
                         </div>
                         <div className="col-md-7">
-                            <Sparklines data={this.props.tempcache.tempCacheB} height={100}>
+                            <Sparklines data={this.props.tempcache.tempCacheB} min="0" max="100">
                                 <SparklinesLine color="red"/>
                                 <SparklinesReferenceLine type="mean"/>
                             </Sparklines>
