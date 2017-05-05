@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 
 export default class Controls extends Component {
 
+    // set the values of the app on page load
     constructor(props) {
         super(props);
 
@@ -18,9 +19,8 @@ export default class Controls extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    async componentDidMount() {
-
-    }
+    // the handleChange() function updates the state of this component whenever the user changes the values in the text
+    // field
 
     handleChange(event) {
         const target = event.target;
@@ -33,6 +33,8 @@ export default class Controls extends Component {
         });
     }
 
+    // whenever the user clicks the update button, the component runs the prop update function to set the state of the
+    // parent component. It also resets the text fields to empty
     handleClick() {
         this.props.onUpdate(this.state);
         this.setState = {
@@ -41,6 +43,7 @@ export default class Controls extends Component {
         }
     }
 
+    // the render function renders the GUI for the control component
     render() {
         return(
             <div className="panel panel-default">

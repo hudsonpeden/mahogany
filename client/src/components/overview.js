@@ -12,11 +12,14 @@ export default class Overview extends Component {
         let avgA = 0.0;
         let avgB = 0.0;
 
+        // calculate the average temperature of the above ground sensors
         this.props.tempcache.tempCacheA.forEach((element) => {
             avgA += element;
 
         });
         avgA = avgA / this.props.tempcache.tempCacheA.length;
+
+        // calculate the average temperature fo the below ground sensores
         this.props.tempcache.tempCacheB.forEach((element) => {
             avgB += element;
 
@@ -24,6 +27,8 @@ export default class Overview extends Component {
         avgB = avgB / this.props.tempcache.tempCacheB.length;
 
 
+        // render the overview component
+        // this component uses React Sparklines to generate simple graphs of the data from the temp caches
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">

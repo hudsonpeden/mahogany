@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 
+
+/*
+*   This component renders the top navbar of the app
+*
+* */
+
+
 export default class Navbar extends Component {
     render() {
         return(

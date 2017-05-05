@@ -4,6 +4,16 @@
 
 import React, { Component } from 'react';
 
+/*
+*       This component gives the user the current values for each of the sensors and relays in the system.
+*
+*       Sensors display ON or OFF if they are TRUE or FALSE, respectively
+*
+*       s1, s2, s3, represent the temperature sensors in the system
+*
+*
+* */
+
 export default class SystemData extends Component {
 
 

@@ -8,6 +8,8 @@ import io from 'socket.io-client';
 const socket = io();
 
 export default class AppBody extends Component {
+
+    // The state object stores what the front end needs to know about the application
     state = {
         temp: {
             s1: 0.0,
@@ -28,18 +30,20 @@ export default class AppBody extends Component {
         }
     };
 
+    //this function runs everytime the state is updated
     async componentDidMount() {
         console.log('component did mount');
-        // const response = await fetch('/cities');
-        // const cities   = await response.json();
 
+        // connect to backend
         socket.on('connect', () => {
             console.log('connected to server ' + socket.id);
             socket.emit('hello', 'hello from front end');
         });
+        // request the state of the relays and controls
         socket.emit('requestRelayState', 'request');
         socket.emit('requestControlState', 'request');
 
+        // return the temperatures from the raspberry pi
         socket.on('sendTemps', (obj) => {
             console.log('temps ' + JSON.stringify(obj));
             this.setState({
@@ -53,6 +57,7 @@ export default class AppBody extends Component {
             console.log('updated state: ' + JSON.stringify(this.state));
         });
 
+        // return the values of the relays from the raspberry pi
         socket.on('serverRelayValue', (val) => {
            console.log(val);
            this.setState({
@@ -63,6 +68,7 @@ export default class AppBody extends Component {
            })
         });
 
+        // grab the set temperatures of the raspberry pi
         socket.on('serverControlValue', (val) => {
             console.log(val);
             this.setState({
@@ -74,6 +80,7 @@ export default class AppBody extends Component {
 
         });
 
+        // grab the temperature cache from the raspberry pi
         socket.on('serverTempCache', (val) => {
             console.log(val);
             this.setState({
@@ -87,6 +94,7 @@ export default class AppBody extends Component {
 
     }
 
+    // whenever the user clicks the update button, the set temperatures are updated
     updateControls(state) {
         //console.log(state);
         this.setState({
@@ -99,7 +107,7 @@ export default class AppBody extends Component {
         socket.emit('sendUpdatedControls', this.state.controls);
     }
 
-
+    // this function renders the child components of the application: Overview, Controls, and SystemData
     render() {
         return(
             <div className="row">

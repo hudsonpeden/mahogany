@@ -1,0 +1,21 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -r babel-register index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.3.0",
+    "babel-register": "^6.24.0",
+    "ds18x20": "^0.2.0",
+    "express": "4.15.2",
+    "nodemon": "^1.11.0",
+    "onoff": "^1.1.2",
+    "socket.io": "1.7.3"
+  }
+}
